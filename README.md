@@ -1,0 +1,3 @@
+# lazy-code
+
+A collection of lazy-code for making my life easier (sometimes)...
