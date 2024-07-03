@@ -1,0 +1,5 @@
+$datum = Get-Date -Format "yyyy-MM-dd"; $path = "C:\din\mapp\sökväg"; $outputFile = "C:\sökväg\till\jasper-resultat-$datum.md"; "Filename | Last Modified Time", "-------- | -----------------" | Set-Content $outputFile; Get-ChildItem -Path $path -Filter *.jasper | Sort-Object LastWriteTime -Descending | ForEach-Object { "$($_.Name) | $($_.LastWriteTime)" | Add-Content $outputFile }
+
+$datum = Get-Date -Format "yyyy-MM-dd"; $path = "C:\din\mapp\sökväg"; $outputFile = "C:\sökväg\till\jasper-resultat-$datum.md"; "| Filename | Last Modified Time |", "| -------- | ----------------- |" | Set-Content $outputFile; Get-ChildItem -Path $path -Filter *.jasper | Sort-Object LastWriteTime -Descending | ForEach-Object { "| $($_.Name) | $($_.LastWriteTime) |" | Add-Content $outputFile }
+
+Compare-Object (Get-Content "C:\sökväg\till\fil1.md") (Get-Content "C:\sökväg\till\fil2.md") | Where-Object { $_.SideIndicator -ne '==' } | ForEach-Object { if ($_.SideIndicator -eq '<=') {"File1: $($_.InputObject)"} else {"File2: $($_.InputObject)"} } | Set-Content "C:\sökväg\till\diffresultat.md"
